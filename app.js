@@ -119,7 +119,7 @@
   }
 
   function calibrationChart(cal) {
-    const W = 260, H = 260, L = 34, T = 10, R = 10, B = 34;
+    const W = 270, H = 260, L = 52, T = 10, R = 12, B = 34;
     const pw = W - L - R, ph = H - T - B;
     const x = (p) => L + p * pw;
     const y = (r) => T + (1 - r) * ph;
@@ -129,10 +129,10 @@
     chart.appendChild(svg("line", { x1: x(0), y1: y(0), x2: x(1), y2: y(1), class: "diag" }));
     for (const t of [0, 0.5, 1]) {
       chart.appendChild(svg("text", { x: x(t), y: H - B + 14 }, pct(t)));
-      chart.appendChild(svg("text", { x: L - 14, y: y(t) + 3 }, pct(t)));
+      chart.appendChild(svg("text", { x: L - 6, y: y(t) + 3, class: "ytick" }, pct(t)));
     }
     chart.appendChild(svg("text", { x: L + pw / 2, y: H - 6 }, "自信度"));
-    chart.appendChild(svg("text", { x: 10, y: T + ph / 2, transform: `rotate(-90 10 ${T + ph / 2})` }, "実際の成功率"));
+    chart.appendChild(svg("text", { x: 11, y: T + ph / 2, transform: `rotate(-90 11 ${T + ph / 2})` }, "実際の成功率"));
     for (const b of cal.buckets) {
       const dot = svg("circle", { cx: x(b.meanP), cy: y(b.rate), r: 4 + Math.min(8, b.n), class: "dot" });
       dot.appendChild(svg("title", {}, `自信度${b.lo}〜${b.hi}%: ${b.n}件、成功率${pct(b.rate)}`));

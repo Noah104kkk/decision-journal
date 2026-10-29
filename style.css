@@ -108,17 +108,19 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .kpis dt { font-size: 0.75rem; color: var(--muted); }
 .kpis dd { margin: 0; font-size: 1.15rem; font-weight: 600; font-variant-numeric: tabular-nums; }
 
-.ins-grid { display: grid; grid-template-columns: 260px 1fr; gap: 18px; align-items: start; }
-.chart-svg { width: 100%; max-width: 260px; height: auto; display: block; }
+.ins-grid { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 18px; align-items: start; }
+.chart-svg { width: 100%; max-width: 270px; height: auto; display: block; }
 .chart-svg .axis { stroke: var(--line); }
 .chart-svg .diag { stroke: var(--muted); stroke-dasharray: 4 4; }
 .chart-svg .dot { fill: var(--accent); fill-opacity: 0.8; stroke: var(--card); stroke-width: 1; }
 .chart-svg text { fill: var(--muted); font-size: 10px; text-anchor: middle; }
+.chart-svg text.ytick { text-anchor: end; }
 
-table.simple { border-collapse: collapse; width: 100%; font-size: 0.85rem; }
+table.simple { border-collapse: collapse; width: 100%; table-layout: auto; font-size: 0.85rem; }
 table.simple th, table.simple td { border-top: 1px solid var(--line); padding: 6px 8px; text-align: left; vertical-align: top; }
-table.simple th { color: var(--muted); font-weight: 500; }
-table.simple td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+table.simple th { color: var(--muted); font-weight: 500; white-space: nowrap; }
+table.simple td.num { font-variant-numeric: tabular-nums; }
+.ins-grid { overflow-wrap: anywhere; }
 
 ul.findings { margin: 10px 0 0; padding-left: 1.2em; font-size: 0.9rem; }
 ul.findings li { margin: 4px 0; }
