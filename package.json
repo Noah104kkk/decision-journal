@@ -1,0 +1,16 @@
+{
+  "name": "decision-journal",
+  "version": "1.0.0",
+  "description": "AIに聞く前に自分の判断を固め、結果を振り返って判断の精度とAIの使い方を測るジャーナル（ブラウザ内完結）",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "jsdom": "^30.1.3"
+  }
+}

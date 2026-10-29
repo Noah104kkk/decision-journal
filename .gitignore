@@ -1,0 +1,23 @@
+# 秘密情報
+.env
+.env.*
+*.pem
+*.key
+*.p12
+secrets/
+credentials*
+*token*
+
+# 個人のデータ・ノート（公開しない）
+*.json
+!package.json
+!package-lock.json
+vault/
+.obsidian/
+
+# OS・エディタ・依存
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+node_modules/

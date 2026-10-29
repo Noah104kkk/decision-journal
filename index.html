@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 外部通信を一切許可しない設定。自分のファイルしか読み込まず、判断の内容をどこにも送りません。 -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>判断ログ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>判断ログ</h1>
+    <p class="sub">AIに聞く<strong>前</strong>に、自分の基準と直感を確定する。後で結果を振り返り、自分の判断の精度と、AIの使い方を測る。データはこのブラウザの中だけに保存されます。</p>
+  </header>
+
+  <main>
+    <section id="due-banner" class="card banner" hidden aria-live="polite"></section>
+
+    <section class="card" aria-labelledby="new-h">
+      <h2 id="new-h">新しい判断を始める</h2>
+      <form id="new-form" class="stack">
+        <label>決めたいこと
+          <input id="new-question" type="text" maxlength="120" required placeholder="例: 次に取り組む機能はどれにするか">
+        </label>
+        <label>背景・制約（任意）
+          <textarea id="new-context" rows="2" maxlength="500" placeholder="期限、予算、前提など"></textarea>
+        </label>
+        <div class="two">
+          <label>選択肢（1行に1つ、2〜5個）
+            <textarea id="new-options" rows="4" required placeholder="検索の改善&#10;通知の刷新&#10;決済の簡略化"></textarea>
+          </label>
+          <label>判断基準（1行に1つ。末尾に重み1〜5、省略は3）
+            <textarea id="new-criteria" rows="4" placeholder="ユーザーへの効果 5&#10;実装コスト 3&#10;リスク 2"></textarea>
+          </label>
+        </div>
+        <div><button type="submit">判断を作る</button></div>
+      </form>
+      <p class="muted">個人名・パスワードなどの機密は書かないでください。端末を共有する場合は、暗号化して書き出し、データ削除をおすすめします。</p>
+    </section>
+
+    <section class="card" aria-labelledby="ins-h">
+      <h2 id="ins-h">自分の判断の傾向</h2>
+      <div id="insights"></div>
+    </section>
+
+    <section aria-labelledby="list-h">
+      <h2 id="list-h" class="list-h">判断の一覧</h2>
+      <div id="list"></div>
+    </section>
+
+    <section class="card tools" aria-labelledby="tool-h">
+      <h2 id="tool-h">データ管理</h2>
+      <div class="row wrap">
+        <button type="button" id="btn-sample">架空のサンプルを読み込む</button>
+        <button type="button" id="btn-export">JSONで書き出す</button>
+        <button type="button" id="btn-reset" class="danger">全データを削除</button>
+      </div>
+      <div class="row wrap enc">
+        <label class="grow">パスフレーズ（8文字以上。保存されません）
+          <input id="passphrase" type="password" autocomplete="off" maxlength="200">
+        </label>
+        <button type="button" id="btn-export-enc" class="ghost">暗号化して書き出す</button>
+        <label class="filebtn">ファイルを読み込む
+          <input id="file-import" type="file" accept="application/json,.json">
+        </label>
+      </div>
+      <p class="muted">暗号化は AES-256-GCM（鍵はパスフレーズから PBKDF2 で導出）。パスフレーズを忘れると復元できません。暗号化ファイルを読み込むときは、先にパスフレーズを入力してください。</p>
+      <p id="msg" class="msg" role="status"></p>
+    </section>
+  </main>
+
+  <footer>MIT License ・ 個人情報は扱いません。サンプルはすべて架空のデータです。</footer>
+  <script src="stats.js"></script>
+  <script src="store.js"></script>
+  <script src="crypto.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
